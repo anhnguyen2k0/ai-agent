@@ -1,116 +1,203 @@
-# 📚 KNOWLEDGE - PRODUCTION SYSTEM
+# 📚 KNOWLEDGE — PRODUCTION & SUPPLY CHAIN RULES
 
 ---
 
-## 📌 Pattern 1: Nhân sự giảm hiệu suất
+## 📌 Rule 1: Sản xuất theo nhu cầu thị trường
 
-### Điều kiện
-- Hiệu suất giảm ≥ 3 ngày liên tiếp
+- Không sản xuất theo cảm tính
+- Luôn dựa trên:
+  - Tốc độ bán (3d, 7d, 14d)
+  - Tồn kho
+  - WIP (đang làm + chờ nhập)
 
-### Nguyên nhân có thể
-- Lỗi lặp lại
-- Quá tải công việc
-- Thiếu kỹ năng
-
-### Hành động
-- Kiểm tra workload
-- Review task đang làm
-- Training lại nếu cần
+👉 Mục tiêu:
+- Sản xuất đúng cái thị trường cần
 
 ---
 
-## 📌 Pattern 2: QC lỗi lặp lại
+## 📌 Rule 2: Tính nhu cầu ngắn hạn
 
-### Điều kiện
-- Cùng một loại lỗi lặp lại ≥ 2 ngày
+Nhu cầu sản phẩm = max(
+  (Bán 7 ngày / 7) × 3 ngày,
+  Bán 3 ngày gần nhất
+)
 
-### Insight
-- Không còn là lỗi cá nhân
-- Là lỗi hệ thống hoặc quy trình
-
-### Hành động
-- Chuẩn hoá lại quy trình
-- Viết guideline rõ ràng
-- Training lại toàn bộ team liên quan
+👉 Dùng để:
+- Dự đoán nhu cầu 3 ngày tới
 
 ---
 
-## 📌 Pattern 3: Lệnh sản xuất bị trễ tăng
+## 📌 Rule 3: Xác định thiếu hàng
 
-### Điều kiện
-- Số lượng lệnh trễ tăng liên tục theo thời gian
+Thiếu = Nhu cầu - (Tồn kho + Chờ nhập + Đang làm)
 
-### Nguyên nhân có thể
-- Planning sai
-- Thiếu nhân sự
-- Phân bổ không hợp lý
+IF:
+- Thiếu > 0
 
-### Hành động
-- Rà soát lại kế hoạch sản xuất
-- Cân đối lại nguồn lực
-- Ưu tiên lệnh quan trọng
+THEN:
+- 🔴 Bắt buộc sản xuất
 
 ---
 
-## 📌 Pattern 4: Sản lượng giảm liên tục
+## 📌 Rule 4: Phân loại sản phẩm theo ưu tiên
 
-### Điều kiện
-- Sản lượng giảm ≥ 5 ngày
+### 🔴 Ưu tiên cao
+- Thiếu hàng
+- Bán nhanh (7d, 14d cao)
 
-### Insight
-- Hệ thống đang mất hiệu suất tổng thể
+### 🟡 Trung bình
+- Đủ hàng
+- Bán ổn định
 
-### Hành động
-- Audit toàn bộ pipeline
-- Xác định bottleneck
-- Kiểm tra từng công đoạn
-
----
-
-## 📌 Pattern 5: QC tăng + Output giảm
-
-### Điều kiện
-- QC lỗi tăng
-- Sản lượng giảm
-
-### Insight
-- Chất lượng đang kéo tụt năng suất
-
-### Hành động
-- Ưu tiên fix lỗi trước khi tăng sản lượng
-- Tập trung cải thiện chất lượng đầu ra
+### ⚪ Thấp
+- Tồn cao
+- Bán chậm
 
 ---
 
-## 📌 Pattern 6: Nhân sự ổn định cao
+## 📌 Rule 5: Tránh thiếu hàng (critical)
 
-### Điều kiện
-- Hiệu suất ổn định và cao hơn trung bình
+IF:
+- Tồn + WIP < nhu cầu 3 ngày
 
-### Insight
-- Có thể dùng làm benchmark
-
-### Hành động
-- Giao task quan trọng
-- Nhân rộng cách làm của nhân sự này
+THEN:
+- 🔴 Nguy cơ hết hàng
+- Ưu tiên sản xuất ngay
 
 ---
 
-## 🎯 Nguyên tắc chung
+## 📌 Rule 6: Tránh tồn kho cao (overstock)
 
-- Ưu tiên:
-  1. Chất lượng (QC)
-  2. Tiến độ
-  3. Sản lượng
+IF:
+- Tồn > nhu cầu 14 ngày
 
-- Không scale khi:
-  - QC đang tăng
-  - Lệnh trễ chưa kiểm soát
+THEN:
+- ⚠️ Không sản xuất thêm
+- Ưu tiên giảm tồn
 
 ---
 
-## 🚀 Ghi nhớ
+## 📌 Rule 7: Sử dụng GTSX (Giá trị sản xuất)
 
-- Mọi vấn đề lặp lại → là vấn đề hệ thống
-- Không xử lý từng case riêng lẻ
-- Luôn nhìn theo xu hướng (trend), không nhìn snapshot 1 ngày
+Mỗi sản phẩm có:
+- GTSX = giá trị sản xuất / đơn vị
+
+---
+
+### Công thức:
+
+Giá trị sản xuất = Số lượng × GTSX
+
+---
+
+### Mục tiêu:
+
+Tổng giá trị sản xuất ≈ Target
+
+---
+
+## 📌 Rule 8: Lập kế hoạch theo target
+
+INPUT:
+- Target (giá trị cần đạt)
+
+OUTPUT:
+- Danh sách sản phẩm + số lượng
+
+---
+
+### Cách làm:
+
+1. Ưu tiên sản phẩm 🔴
+2. Sau đó 🟡
+3. Bỏ qua ⚪ (nếu không cần)
+
+---
+
+### Constraint:
+
+- Tổng giá trị ≈ Target
+- Không bỏ sót sản phẩm thiếu hàng
+
+---
+
+## 📌 Rule 9: Ưu tiên sản phẩm hiệu quả cao
+
+IF:
+- Bán nhanh + GTSX cao
+
+THEN:
+- 🔴 Ưu tiên sản xuất
+
+---
+
+## 📌 Rule 10: Cân bằng sản xuất vs bán
+
+Không để xảy ra:
+
+❌ Sản xuất nhiều nhưng không bán được  
+❌ Bán tốt nhưng không có hàng  
+
+---
+
+## 📌 Rule 11: Phát hiện bottleneck
+
+IF:
+- Một nhân sự làm nhiều WIP
+
+THEN:
+- ⚠️ Bottleneck
+- Cần phân bổ lại
+
+---
+
+## 📌 Rule 12: Phát hiện lệch sản xuất
+
+IF:
+- Sản phẩm tồn cao + bán chậm
+- Nhưng vẫn đang sản xuất
+
+THEN:
+- ⚠️ Sai định hướng sản xuất
+
+---
+
+## 📌 Rule 13: Cross-analysis bắt buộc
+
+- QC ↑ + Output ↓ → vấn đề chất lượng
+- Lệnh trễ ↑ → vấn đề planning
+- Tồn thấp + bán cao → thiếu hàng
+- Tồn cao + bán thấp → overstock
+
+---
+
+## 📌 Rule 14: Validate kế hoạch
+
+Sau khi lập kế hoạch:
+
+Phải đảm bảo:
+
+- Tổng giá trị ≈ Target
+- Không có sản phẩm:
+  - thiếu hàng mà không sản xuất
+  - tồn cao mà vẫn sản xuất
+
+---
+
+## 📌 Rule 15: Ưu tiên hệ thống, không tối ưu cục bộ
+
+- Không tối ưu 1 sản phẩm
+- Tối ưu toàn bộ:
+  - sản xuất
+  - tồn kho
+  - bán hàng
+
+---
+
+## 📌 Rule 16: Quyết định dựa trên dữ liệu
+
+- Không đoán
+- Không cảm tính
+- Luôn có:
+  - số liệu
+  - logic
