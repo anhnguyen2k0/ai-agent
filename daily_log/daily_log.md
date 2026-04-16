@@ -18,9 +18,9 @@
 | Ngọc Ánh | 7 BT-BOOK14-001 | 2.730.000 |
 | Trung Hiếu | 1 BT-CHUNHAT25-CHOTUONG | 1.125.000 |
 
----
 
-    ### Tổng quan bán hàng & kho
+  
+    ## Tổng quan bán hàng & kho
     | Mã SP | GTSX / đơn vị | Tồn kho | Đang làm | Chờ nhập kho | Có thể bán | Bán 3 ngày | Bán 7 ngày | Bán 14 ngày | Bán 30 ngày |
 |------|---------------|--------|----------|--------------|------------|------------|------------|-------------|-------------|
 | BT-CUBIC10-011 | 399200 | 178 | 6 | 43 | 21 | 6 | 11 | 24 | 73 |
@@ -57,9 +57,7 @@
 | BT-CHUNHAT25-007 | 1480000 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |
 | BT-CHUNHAT25-005 | 1040000 | 11 | 0 | 1 | 1 | 0 | 0 | 0 | 2 |
 | BT-CHUNHAT25-004 | 1200000 | 28 | 1 | 2 | 3 | 0 | 0 | 0 | 2 |
-
----
-
+  
   ## 📦 Sản phẩm đang sản xuất
 | Nhân sự | Sản phẩm |
 |--------|---------- |
@@ -69,5 +67,4 @@
 | Ngô Hải | 3 BT-CHUNHAT20-007 |
 | Ngọc Ánh | 3 BT-CUBIC15-010, 3 BT-BOOK14-001 |
 | Vũ Trâm | 6 BT-CUBIC10-011 |
-
 
