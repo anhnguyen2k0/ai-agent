@@ -1,6 +1,6 @@
 
 ---
-## Daily Log ngày 16/04/2024
+## Daily Log ngày 15/04/2024
 ## 📊 Bảng GTSX theo Nhân sự
 | Nhân sự | Sản phẩm | GTSX (VNĐ) |
 |--------|----------|------------|
